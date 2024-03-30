@@ -5,6 +5,15 @@ const search = StyleSheet.create({
     backgroundColor: "white",
     padding: 15,
     borderRadius: 10,
+    marginTop: 10,
+    marginBottom: 20,
+  },
+
+  title: {
+    fontSize: 22,
+    fontWeight: "700",
+    marginVertical: 5,
+    marginRight: 60,
   },
 });
 

@@ -9,14 +9,21 @@ import {
   StyleSheet,
   Image,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import getMealDish from "../services/dish";
 import menuStyles from "../styles/MenuStyles";
 
 const Menu = ({ route }) => {
   const { mealID } = route.params;
+  const navigation = useNavigation();
 
   const [dish, setDish] = useState([]);
+
+  const handleBack = () => {
+    navigation.goBack();
+  };
 
   const fetchDish = async () => {
     try {
@@ -30,21 +37,31 @@ const Menu = ({ route }) => {
   }, [mealID]);
 
   return (
-    <SafeAreaView style={menuStyles.handler}>
+    <View style={menuStyles.handler}>
+      {/* Image */}
+      <View style={menuStyles.container}>
+        <Image
+          source={{ uri: dish.strMealThumb }}
+          style={menuStyles.imgStyle}
+        />
+
+        {/* Back Button */}
+        <TouchableOpacity style={menuStyles.circle} onPress={handleBack}>
+          <View>
+            <Text style={menuStyles.back}>←</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+
+      {/* Contents */}
       <ScrollView>
-        <View style={menuStyles.container}>
-          <Image
-            source={{ uri: dish.strMealThumb }}
-            style={menuStyles.imgStyle}
-          />
-        </View>
         <View style={menuStyles.infoContainer}>
           <Text style={menuStyles.title}>{dish.strMeal}</Text>
           <View>{getIngredientsList(dish)}</View>
           <Text>{dish.strInstructions}</Text>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

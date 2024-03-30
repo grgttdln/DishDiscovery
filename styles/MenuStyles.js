@@ -6,15 +6,11 @@ const menuStyles = StyleSheet.create({
     flex: 1,
   },
 
-  container: {
-    paddingHorizontal: 10,
-    alignItems: "center",
-  },
+  container: {},
 
   imgStyle: {
-    height: 350,
-    width: 350,
-    borderRadius: 50,
+    height: 380,
+    width: 400,
   },
 
   title: {
@@ -26,6 +22,28 @@ const menuStyles = StyleSheet.create({
   infoContainer: {
     marginTop: 20,
     paddingHorizontal: 30,
+  },
+
+  ingredientTitle: {},
+
+  instructionsTitle: {},
+
+  back: {
+    fontSize: 20,
+    color: "black",
+    fontWeight: "600",
+  },
+
+  circle: {
+    width: 50,
+    height: 50,
+    position: "absolute",
+    borderRadius: 25,
+    backgroundColor: "#f7f7ff",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 60,
+    marginLeft: 20,
   },
 });
 

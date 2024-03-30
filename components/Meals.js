@@ -47,10 +47,12 @@ const Meals = (props) => {
             })
           }
         >
-          <Image
-            source={{ uri: item.strMealThumb }}
-            style={mealsStyles.imgItem}
-          />
+          <View style={mealsStyles.imgContainer}>
+            <Image
+              source={{ uri: item.strMealThumb }}
+              style={mealsStyles.imgItem}
+            />
+          </View>
           <Text style={mealsStyles.meal}>{item.strMeal}</Text>
         </TouchableOpacity>
       )}

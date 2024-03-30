@@ -7,6 +7,7 @@ import {
   View,
   SafeAreaView,
   StyleSheet,
+  ScrollView,
 } from "react-native";
 import Categories from "./Categories";
 import Search from "./Search";
@@ -17,7 +18,9 @@ const Page = () => {
     <SafeAreaView style={styles.handler}>
       <View style={styles.container}>
         <Search />
-        <Categories />
+        <ScrollView showsHorizontalScrollIndicator={false}>
+          <Categories />
+        </ScrollView>
       </View>
     </SafeAreaView>
   );

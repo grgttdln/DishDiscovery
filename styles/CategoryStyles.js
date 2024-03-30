@@ -18,8 +18,8 @@ const categories = StyleSheet.create({
   },
 
   categoriesTxt: {
-    marginTop: 20,
-    fontSize: 25,
+    marginTop: 10,
+    fontSize: 20,
     fontWeight: "700",
   },
 });

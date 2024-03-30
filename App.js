@@ -18,7 +18,14 @@ export default function App() {
           component={Page}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Menu" component={Menu} />
+        <Stack.Screen
+          name="Menu"
+          component={Menu}
+          options={{
+            headerShown: false,
+            headerBackTitle: "Back",
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
