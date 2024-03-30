@@ -7,11 +7,15 @@ import {
   FlatList,
   ScrollView,
   Image,
+  TouchableOpacity,
 } from "react-native";
 import getMealsFromCategories from "../services/meals";
 import mealsStyles from "../styles/MealsStyles";
+import { useNavigation } from "@react-navigation/native";
 
 const Meals = (props) => {
+  const navigation = useNavigation();
+
   const [meals, setMeals] = useState([]);
 
   const fetchMeals = async () => {
@@ -35,13 +39,20 @@ const Meals = (props) => {
       showsVerticalScrollIndicator={false}
       keyExtractor={({ idMeal }) => idMeal.toString()}
       renderItem={({ item }) => (
-        <View style={mealsStyles.container}>
+        <TouchableOpacity
+          style={mealsStyles.container}
+          onPress={() =>
+            navigation.navigate("Menu", {
+              mealID: item.idMeal,
+            })
+          }
+        >
           <Image
             source={{ uri: item.strMealThumb }}
             style={mealsStyles.imgItem}
           />
           <Text style={mealsStyles.meal}>{item.strMeal}</Text>
-        </View>
+        </TouchableOpacity>
       )}
     />
   );

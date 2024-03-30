@@ -63,7 +63,7 @@ const Categories = () => {
       />
 
       {/* Meals */}
-      <Meals SelectedMealCategory={selectedCategory} />
+      <Meals SelectedMealCategory={selectedCategory} style={{ flex: 1 }} />
     </View>
   );
 };
