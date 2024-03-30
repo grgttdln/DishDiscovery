@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+
+import Categories from "./components/Categories";
+import Search from "./components/Search";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.handler}>
+      <View style={styles.container}>
+        <Search />
+        <Categories />
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  handler: {
+    backgroundColor: "#f7f7ff",
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+
+  container: {
+    backgroundColor: "#f7f7ff",
+    marginLeft: 25,
+    marginRight: 25,
+    marginTop: 15,
   },
 });
