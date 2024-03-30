@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ScrollView,
 } from "react-native";
 import getRecipesFromApi from "../services/recipe.js";
 import categories from "../styles/CategoryStyles.js";
@@ -63,7 +64,9 @@ const Categories = () => {
       />
 
       {/* Meals */}
-      <Meals SelectedMealCategory={selectedCategory} style={{ flex: 1 }} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Meals SelectedMealCategory={selectedCategory} style={{ flex: 1 }} />
+      </ScrollView>
     </View>
   );
 };
