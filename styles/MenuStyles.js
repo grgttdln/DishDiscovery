@@ -14,19 +14,56 @@ const menuStyles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 30,
-    fontWeight: "500",
-    marginBottom: 20,
+    fontSize: 24,
+    fontWeight: "600",
+    marginBottom: 25,
   },
 
   infoContainer: {
-    marginTop: 20,
-    paddingHorizontal: 30,
+    paddingHorizontal: 35,
+    marginTop: -40,
+    borderRadius: 40,
+    paddingVertical: 40,
+    backgroundColor: "#f7f7ff",
   },
 
-  ingredientTitle: {},
+  detailsContainer: {
+    marginBottom: 25,
+  },
 
-  instructionsTitle: {},
+  ingContainer: {
+    borderWidth: 1,
+    borderColor: "#dee2e6",
+    borderRadius: 10,
+    padding: 10,
+    justifyContent: "space-between",
+    flexDirection: "row",
+    marginBottom: 14,
+  },
+
+  ingSubContainer: {
+    flexDirection: "row",
+  },
+
+  ingIcon: {
+    marginRight: 10,
+  },
+
+  ingredientTitle: {
+    fontSize: 20,
+    fontWeight: "600",
+    marginBottom: 10,
+  },
+
+  instructionsTitle: {
+    fontSize: 20,
+    fontWeight: "600",
+    marginBottom: 10,
+  },
+
+  insText: {
+    textAlign: "justify",
+  },
 
   back: {
     fontSize: 20,

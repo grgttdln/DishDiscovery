@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
+  Animated,
   ActivityIndicator,
-  FlatList,
   Text,
-  TextInput,
   View,
-  SafeAreaView,
   StyleSheet,
   Image,
-  ScrollView,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import getMealDish from "../services/dish";
@@ -19,7 +17,11 @@ const Menu = ({ route }) => {
   const { mealID } = route.params;
   const navigation = useNavigation();
 
-  const [dish, setDish] = useState([]);
+  const scrollA = useRef(new Animated.Value(0)).current;
+  const { width } = Dimensions.get("window");
+
+  const [dish, setDish] = useState(null);
+  const [imageHeight, setImageHeight] = useState(200);
 
   const handleBack = () => {
     navigation.goBack();
@@ -36,31 +38,68 @@ const Menu = ({ route }) => {
     fetchDish();
   }, [mealID]);
 
+  useEffect(() => {
+    if (dish && dish.strMealThumb) {
+      Image.getSize(
+        dish.strMealThumb,
+        (imgWidth, imgHeight) => {
+          const aspectRatio = imgWidth / imgHeight;
+          setImageHeight(width / aspectRatio);
+        },
+        (error) => {
+          console.error("Failed to get size for image", error);
+        }
+      );
+    }
+  }, [dish, width]);
+
+  if (!dish) {
+    return <ActivityIndicator size="large" style={styles.loadingIndicator} />;
+  }
+
   return (
     <View style={menuStyles.handler}>
-      {/* Image */}
-      <View style={menuStyles.container}>
-        <Image
-          source={{ uri: dish.strMealThumb }}
-          style={menuStyles.imgStyle}
-        />
-
-        {/* Back Button */}
-        <TouchableOpacity style={menuStyles.circle} onPress={handleBack}>
-          <View>
-            <Text style={menuStyles.back}>←</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-
-      {/* Contents */}
-      <ScrollView>
-        <View style={menuStyles.infoContainer}>
-          <Text style={menuStyles.title}>{dish.strMeal}</Text>
-          <View>{getIngredientsList(dish)}</View>
-          <Text>{dish.strInstructions}</Text>
+      <Animated.ScrollView
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollA } } }],
+          { useNativeDriver: true }
+        )}
+        scrollEventThrottle={16}
+      >
+        <View style={menuStyles.container}>
+          <Animated.Image
+            source={{ uri: dish.strMealThumb }}
+            style={[styles.image(scrollA, imageHeight), { width }]}
+          />
+          <TouchableOpacity style={menuStyles.circle} onPress={handleBack}>
+            <View>
+              <Text style={menuStyles.back}>←</Text>
+            </View>
+          </TouchableOpacity>
         </View>
-      </ScrollView>
+
+        {/* Information */}
+        <View style={menuStyles.infoContainer}>
+          {/* Title */}
+          <Text style={menuStyles.title}>{dish.strMeal}</Text>
+
+          {/* Ingredients */}
+          <View style={menuStyles.detailsContainer}>
+            <Text style={menuStyles.ingredientTitle}>🧺 Ingredients</Text>
+            <View>{getIngredientsList(dish)}</View>
+          </View>
+
+          {/* Instructions */}
+          <View style={menuStyles.detailsContainer}>
+            <Text style={menuStyles.instructionsTitle}>📖 Instructions</Text>
+            <Text style={menuStyles.insText}>
+              {dish.strInstructions
+                .replace(/\n\n/g, "\n")
+                .replace(/\n/g, "\n\n")}
+            </Text>
+          </View>
+        </View>
+      </Animated.ScrollView>
     </View>
   );
 };
@@ -72,11 +111,45 @@ const getIngredientsList = (mealDetails) => {
     const measure = mealDetails[`strMeasure${i}`];
     if (ingredient && measure) {
       ingredientsList.push(
-        <Text key={i}>{`${i}.) ${measure} ${ingredient}`}</Text>
+        <View style={menuStyles.ingContainer} key={i}>
+          <View style={menuStyles.ingSubContainer}>
+            <Text style={menuStyles.ingIcon}>⬜️</Text>
+            <Text>{`${ingredient}`}</Text>
+          </View>
+          <Text>{`${measure}`}</Text>
+        </View>
       );
     }
   }
   return ingredientsList;
 };
+
+const styles = StyleSheet.create({
+  image: (scrollA, imageHeight) => ({
+    width: "100%",
+    height: imageHeight,
+    transform: [
+      {
+        translateY: scrollA.interpolate({
+          inputRange: [-300, 0, 300],
+          outputRange: [0, 0, 150],
+          extrapolate: "clamp",
+        }),
+      },
+      {
+        scale: scrollA.interpolate({
+          inputRange: [-300, 0, 300],
+          outputRange: [1, 1, 1.5],
+          extrapolate: "clamp",
+        }),
+      },
+    ],
+  }),
+  loadingIndicator: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default Menu;
