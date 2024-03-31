@@ -14,8 +14,9 @@ import getMealDish from "../services/dish";
 import menuStyles from "../styles/MenuStyles";
 
 const Menu = ({ route }) => {
-  const { mealID } = route.params;
   const navigation = useNavigation();
+
+  const { mealID } = route.params;
 
   const scrollA = useRef(new Animated.Value(0)).current;
   const { width } = Dimensions.get("window");

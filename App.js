@@ -2,10 +2,9 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import Categories from "./components/Categories";
-import Search from "./components/Search";
 import Page from "./components/Page";
 import Menu from "./components/Menu";
+import Bookmark from "./components/Bookmark";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -17,6 +16,14 @@ export default function App() {
           name="Page"
           component={Page}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Bookmark"
+          component={Bookmark}
+          options={{
+            headerShown: false,
+            headerBackTitle: "Back",
+          }}
         />
         <Stack.Screen
           name="Menu"
