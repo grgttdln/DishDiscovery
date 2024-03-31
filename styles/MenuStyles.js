@@ -82,6 +82,18 @@ const menuStyles = StyleSheet.create({
     marginTop: 60,
     marginLeft: 20,
   },
+
+  circleBookmark: {
+    width: 50,
+    height: 50,
+    position: "absolute",
+    borderRadius: 25,
+    backgroundColor: "#f7f7ff",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 60,
+    right: 20,
+  },
 });
 
 export default menuStyles;

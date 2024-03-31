@@ -12,6 +12,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import getMealDish from "../services/dish";
 import menuStyles from "../styles/MenuStyles";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faBookmark } from "@fortawesome/free-regular-svg-icons/faBookmark";
 
 const Menu = ({ route }) => {
   const navigation = useNavigation();
@@ -72,9 +74,18 @@ const Menu = ({ route }) => {
             source={{ uri: dish.strMealThumb }}
             style={[styles.image(scrollA, imageHeight), { width }]}
           />
+
+          {/* Back */}
           <TouchableOpacity style={menuStyles.circle} onPress={handleBack}>
             <View>
               <Text style={menuStyles.back}>←</Text>
+            </View>
+          </TouchableOpacity>
+
+          {/* Bookmark */}
+          <TouchableOpacity style={menuStyles.circleBookmark}>
+            <View>
+              <FontAwesomeIcon icon={faBookmark} size={20} />
             </View>
           </TouchableOpacity>
         </View>
