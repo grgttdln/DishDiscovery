@@ -1,14 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  FlatList,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View, FlatList, Image, TouchableOpacity } from "react-native";
 import getMealsFromCategories from "../services/meals";
 import mealsStyles from "../styles/MealsStyles";
 import { useNavigation } from "@react-navigation/native";

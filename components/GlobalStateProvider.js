@@ -3,12 +3,7 @@ import React, { createContext, useState, useContext } from "react";
 const GlobalStateContext = createContext();
 
 export const GlobalStateProvider = ({ children }) => {
-  // const [count, setCount] = useState(0);
-
   const [bkItems, setBKItems] = React.useState([]);
-
-  // const increment = () => setCount(count + 1);
-  // const decrement = () => setCount(count - 1);
 
   // Add Meal to Bookmark
   const addBookmark = (currMealID) => {
