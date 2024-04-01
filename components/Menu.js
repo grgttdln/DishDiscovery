@@ -14,9 +14,12 @@ import getMealDish from "../services/dish";
 import menuStyles from "../styles/MenuStyles";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons/faBookmark";
+import { useGlobalState } from "./GlobalStateProvider";
 
 const Menu = ({ route }) => {
   const navigation = useNavigation();
+
+  const { bkItems, addBookmark } = useGlobalState();
 
   const { mealID } = route.params;
 
@@ -83,7 +86,10 @@ const Menu = ({ route }) => {
           </TouchableOpacity>
 
           {/* Bookmark */}
-          <TouchableOpacity style={menuStyles.circleBookmark}>
+          <TouchableOpacity
+            style={menuStyles.circleBookmark}
+            onPress={() => addBookmark(dish.idMeal)}
+          >
             <View>
               <FontAwesomeIcon icon={faBookmark} size={20} />
             </View>

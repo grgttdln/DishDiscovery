@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  FlatList,
-  Text,
-  TextInput,
-  View,
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
+import { View, SafeAreaView, StyleSheet, ScrollView } from "react-native";
 import Categories from "./Categories";
 import Search from "./Search";
-import search from "../styles/SearchStyles";
+import { useNavigation } from "@react-navigation/native";
 
 const Page = () => {
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView style={styles.handler}>
       <View style={styles.container}>
