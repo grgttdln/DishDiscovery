@@ -17,7 +17,7 @@ import getSavedDish from "../services/savedDish";
 const Bookmark = ({ route }) => {
   const navigation = useNavigation();
 
-  const { bkItems } = useGlobalState();
+  const { bkItems, removeBookmark } = useGlobalState();
   const [info, setInfo] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -53,7 +53,7 @@ const Bookmark = ({ route }) => {
         </TouchableOpacity>
         <Text style={bookmarkStyles.title}>Bookmark</Text>
 
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           {loading ? (
             <ActivityIndicator size="large" color="#0000ff" />
           ) : (
@@ -63,10 +63,18 @@ const Bookmark = ({ route }) => {
                 <View style={bookmarkStyles.itemContainer}>
                   {info[item] && info[item].length > 0 && (
                     <View style={bookmarkStyles.itemContent}>
-                      <Image
-                        source={{ uri: info[item][0].strMealThumb }}
-                        style={bookmarkStyles.imgItem}
-                      />
+                      <TouchableOpacity
+                        onPress={() =>
+                          navigation.navigate("Menu", {
+                            mealID: info[item][0].idMeal,
+                          })
+                        }
+                      >
+                        <Image
+                          source={{ uri: info[item][0].strMealThumb }}
+                          style={bookmarkStyles.imgItem}
+                        />
+                      </TouchableOpacity>
                       <View style={bookmarkStyles.itemInfo}>
                         <Text
                           style={bookmarkStyles.dishTitle}
@@ -76,7 +84,10 @@ const Bookmark = ({ route }) => {
                         >{`${info[item][0].strCategory}`}</Text>
                       </View>
 
-                      <TouchableOpacity style={bookmarkStyles.itemRemove}>
+                      <TouchableOpacity
+                        onPress={() => removeBookmark(info[item][0].idMeal)}
+                        style={bookmarkStyles.itemRemove}
+                      >
                         <Text style={bookmarkStyles.minusIcon}>➖</Text>
                       </TouchableOpacity>
                     </View>

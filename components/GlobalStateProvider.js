@@ -16,11 +16,16 @@ export const GlobalStateProvider = ({ children }) => {
     console.log(currMealID, bkItems);
   };
 
-  // Remove Meal to Bookmark
-  const removeBookmart = () => {};
+  const removeBookmark = (currMealID) => {
+    setBKItems((prevBKItems) =>
+      prevBKItems.filter((item) => item !== currMealID)
+    );
+  };
 
   return (
-    <GlobalStateContext.Provider value={{ bkItems, addBookmark }}>
+    <GlobalStateContext.Provider
+      value={{ bkItems, addBookmark, removeBookmark }}
+    >
       {children}
     </GlobalStateContext.Provider>
   );
