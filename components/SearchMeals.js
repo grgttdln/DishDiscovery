@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Text, View } from "react-native";
 import getSearchedMeal from "../services/mealSearch";
+import { useGlobalState } from "./GlobalStateProvider";
 
-const SearchMeals = (props) => {
+const SearchMeals = () => {
+  const { meal, setMeal } = useGlobalState();
   return (
     <View>
-      <Text>Meals</Text>
+      <Text>{meal}</Text>
+      <Text>yoo</Text>
     </View>
   );
 };

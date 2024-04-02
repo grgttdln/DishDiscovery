@@ -7,7 +7,10 @@ export const GlobalStateProvider = ({ children }) => {
   const [showComponent, setShowComponent] = useState(true);
 
   // Bookmark
-  const [bkItems, setBKItems] = React.useState([]);
+  const [bkItems, setBKItems] = useState([]);
+
+  // Search Meal
+  const [meal, setMeal] = useState("");
 
   // Add Meal to Bookmark
   const addBookmark = (currMealID) => {
@@ -32,6 +35,8 @@ export const GlobalStateProvider = ({ children }) => {
         removeBookmark,
         showComponent,
         setShowComponent,
+        setMeal,
+        meal,
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons/faBookmark";
@@ -10,9 +10,9 @@ import { useGlobalState } from "./GlobalStateProvider";
 const Search = () => {
   const navigation = useNavigation();
 
-  const { showComponent, setShowComponent } = useGlobalState();
+  const { showComponent, setShowComponent, setMeal } = useGlobalState();
 
-  const { searchMeal, setSearchMeal } = useState("");
+  const [searchMeal, setSearchMeal] = useState("");
 
   return (
     <View>
@@ -27,11 +27,25 @@ const Search = () => {
         </TouchableOpacity>
       </View>
 
-      {/* Search Input */}
+      {/* Search Container */}
       <View style={search.subContainer}>
-        <TextInput style={search.container} placeholder="Search for Recipes" />
+        {/* Search Input */}
+        <TextInput
+          onChangeText={(text) => {
+            setSearchMeal(text);
+            console.log(searchMeal);
+          }}
+          value={searchMeal}
+          style={search.container}
+          placeholder="Search for Recipes"
+        />
+
+        {/* Search Button */}
         <TouchableOpacity
-          onPress={() => setShowComponent(false)}
+          onPress={() => {
+            setShowComponent(false);
+            setMeal(searchMeal);
+          }}
           style={search.searchIconContainer}
         >
           <FontAwesomeIcon icon={faFolder} />
