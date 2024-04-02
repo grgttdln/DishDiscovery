@@ -7,6 +7,7 @@ const search = StyleSheet.create({
     borderRadius: 10,
     marginTop: 10,
     marginBottom: 20,
+    width: 280,
   },
 
   title: {
@@ -19,7 +20,7 @@ const search = StyleSheet.create({
   subContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
   },
 
   circle: {
@@ -29,6 +30,23 @@ const search = StyleSheet.create({
     backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
+    marginLeft: -35,
+  },
+
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+
+  searchIconContainer: {
+    backgroundColor: "white",
+    height: 50,
+    width: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginTop: -10,
   },
 });
 

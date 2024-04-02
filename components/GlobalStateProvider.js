@@ -3,12 +3,14 @@ import React, { createContext, useState, useContext } from "react";
 const GlobalStateContext = createContext();
 
 export const GlobalStateProvider = ({ children }) => {
+  // Component
+  const [showComponent, setShowComponent] = useState(true);
+
+  // Bookmark
   const [bkItems, setBKItems] = React.useState([]);
 
   // Add Meal to Bookmark
   const addBookmark = (currMealID) => {
-    console.log(currMealID, bkItems);
-
     if (!bkItems.includes(currMealID)) {
       setBKItems((prevBKItems) => [...prevBKItems, currMealID]);
     }
@@ -24,7 +26,13 @@ export const GlobalStateProvider = ({ children }) => {
 
   return (
     <GlobalStateContext.Provider
-      value={{ bkItems, addBookmark, removeBookmark }}
+      value={{
+        bkItems,
+        addBookmark,
+        removeBookmark,
+        showComponent,
+        setShowComponent,
+      }}
     >
       {children}
     </GlobalStateContext.Provider>

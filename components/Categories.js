@@ -10,11 +10,17 @@ import {
 import getRecipesFromApi from "../services/recipe.js";
 import categories from "../styles/CategoryStyles.js";
 import Meals from "./Meals.js";
+import SearchMeals from "./SearchMeals.js";
+import { useGlobalState } from "./GlobalStateProvider";
 
 const Categories = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+
   const [selectedCategory, setSelectedCategory] = useState("");
+
+  const { showComponent, setShowComponent } = useGlobalState();
+  // const [showComponent, setShowComponent] = useState(true);
 
   const fetchData = async () => {
     try {
@@ -56,17 +62,27 @@ const Categories = () => {
             style={categories.item}
             onPress={() => setSelectedCategory(item.strCategory)}
           >
-            <View>
-              <Text>{item.strCategory}</Text>
-            </View>
+            <TouchableOpacity onPress={() => setShowComponent(true)}>
+              <View>
+                <Text>{item.strCategory}</Text>
+              </View>
+            </TouchableOpacity>
           </TouchableOpacity>
         )}
       />
 
-      {/* Meals */}
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Meals SelectedMealCategory={selectedCategory} style={{ flex: 1 }} />
-      </ScrollView>
+      {/* Conditional Rendering */}
+      {showComponent ? (
+        /* Meals in Category */
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Meals SelectedMealCategory={selectedCategory} style={{ flex: 1 }} />
+        </ScrollView>
+      ) : (
+        /* Meals in Search */
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <SearchMeals />
+        </ScrollView>
+      )}
     </View>
   );
 };
