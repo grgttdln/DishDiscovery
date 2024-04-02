@@ -1,16 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
-import {
-  Animated,
-  ActivityIndicator,
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native";
+import { Text, View } from "react-native";
+import getSearchedMeal from "../services/mealSearch";
 
-const SearchMeals = () => {
+const SearchMeals = (props) => {
   return (
     <View>
       <Text>Meals</Text>

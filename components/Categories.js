@@ -20,7 +20,6 @@ const Categories = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const { showComponent, setShowComponent } = useGlobalState();
-  // const [showComponent, setShowComponent] = useState(true);
 
   const fetchData = async () => {
     try {

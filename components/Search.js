@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  FlatList,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faBookmark } from "@fortawesome/free-regular-svg-icons/faBookmark";
 import { faFolder } from "@fortawesome/free-regular-svg-icons/faFolder";
@@ -18,6 +11,8 @@ const Search = () => {
   const navigation = useNavigation();
 
   const { showComponent, setShowComponent } = useGlobalState();
+
+  const { searchMeal, setSearchMeal } = useState("");
 
   return (
     <View>
