@@ -24,7 +24,7 @@ const mealsSStyles = StyleSheet.create({
   },
 
   meal: {
-    width: 100,
+    width: 120,
     flexWrap: "wrap",
     fontSize: 14,
     fontWeight: "700",

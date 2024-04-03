@@ -1,10 +1,20 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Text, View, StyleSheet, FlatList, Image } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  FlatList,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import getSearchedMeal from "../services/mealSearch";
 import { useGlobalState } from "./GlobalStateProvider";
 import mealsSStyles from "../styles/SearchMealStyles";
+import { useNavigation } from "@react-navigation/native";
 
 const SearchMeals = () => {
+  const navigation = useNavigation();
+
   const { meal, setMeal } = useGlobalState();
 
   const [resultMeals, setResultMeals] = useState([]);
@@ -21,7 +31,14 @@ const SearchMeals = () => {
   }, [meal]);
 
   const renderMealItem = ({ item }) => (
-    <View style={mealsSStyles.container}>
+    <TouchableOpacity
+      style={mealsSStyles.container}
+      onPress={() =>
+        navigation.navigate("Menu", {
+          mealID: item.idMeal,
+        })
+      }
+    >
       <View style={mealsSStyles.imgContainer}>
         <Image
           source={{ uri: item.strMealThumb }}
@@ -29,7 +46,7 @@ const SearchMeals = () => {
         />
       </View>
       <Text style={mealsSStyles.meal}>{item.strMeal}</Text>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
